@@ -1,0 +1,14 @@
+---
+name: Terraform Quality Assurance
+description: 'Pipeline that ensures the quality of Terraform code using pre-commit'
+runs:
+  using: "composite"
+  steps:
+    - name: 'pre-commit'
+      id: 'pre-commit'
+      run: |
+        # Copy the pre-commit-terraform-qa.yaml file in the repository where the action is defined to the repository where the action is executed
+        cp ${GITHUB_ACTION_PATH}/pre-commit-terraform-qa.yaml .pre-commit-config.yaml
+        pre-commit install
+        pre-commit run --all-files
+      shell: bash

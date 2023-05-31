@@ -1,2 +1,2 @@
-# github-actions
-Github Actions Library
+# Github Actions
+Github Actions Library for my personal use
