@@ -9,6 +9,9 @@ runs:
       run: |
         sudo apt install python3-pip
         pip install pre-commit
+        pip install detect-secrets
+        curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+        curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
       shell: bash
     - name: 'pre-commit'
       id: 'pre-commit'
