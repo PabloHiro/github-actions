@@ -7,7 +7,7 @@ runs:
     - name: 'install'
       id: 'install'
       run: |
-        apt install python3-pip
+        sudo apt install python3-pip
         pip install pre-commit
       shell: bash
     - name: 'pre-commit'
