@@ -4,6 +4,12 @@ description: 'Pipeline that ensures the quality of Terraform code using pre-comm
 runs:
   using: "composite"
   steps:
+    - name: 'install'
+      id: 'install'
+      run: |
+        apt install python3-pip
+        pip install pre-commit
+      shell: bash
     - name: 'pre-commit'
       id: 'pre-commit'
       run: |
