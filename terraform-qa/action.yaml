@@ -7,7 +7,7 @@ runs:
     - name: 'install'
       id: 'install'
       run: |
-        sudo apt install python3-pip
+        sudo apt install python3-pip git
         pip install pre-commit
         pip install detect-secrets
         curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
@@ -18,6 +18,13 @@ runs:
       run: |
         # Copy the pre-commit-terraform-qa.yaml file in the repository where the action is defined to the repository where the action is executed
         cp ${GITHUB_ACTION_PATH}/pre-commit-terraform-qa.yaml .pre-commit-config.yaml
+        detect-secrets scan > .secrets.baseline
         pre-commit install
         pre-commit run --all-files
       shell: bash
+    - name: 'auto terraform fmt'
+      id: 'terraform-fmt'
+      run: |
+        git status
+        git commit -am "fix: terraform fmt"
+        git push
