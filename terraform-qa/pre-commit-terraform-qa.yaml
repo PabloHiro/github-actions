@@ -1,5 +1,5 @@
 default_stages: [commit]
-exclude: '.github/*|.gitignore'
+exclude: '.github/.*|.gitignore'
 repos:
     - repo: https://github.com/antonbabenko/pre-commit-terraform
       rev: v1.64.1
