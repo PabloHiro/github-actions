@@ -30,5 +30,6 @@ runs:
       if: always()
       with:
         add: '-u'
+        commit: '--no-verify'
         message: "fix: auto linting"
-        default_author: user_info
+        default_author: github_actor
