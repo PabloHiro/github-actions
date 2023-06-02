@@ -25,12 +25,11 @@ runs:
         pre-commit run --all-files
       shell: bash
     - name: 'auto-linting'
-      if: always()
       id: 'auto-linting'
-      run: |
-        git config user.email "terraform@bot"
-        git config user.name "Terraform Bot"
-        git status
-        git commit -am "fix: auto linting" --no-verify
-        git push
-      shell: bash
+      uses: EndBug/add-and-commit@v9.1.3
+      if: always()
+      with:
+        add: ''
+        commit: -a
+        message: "fix: auto linting"
+        default_author: user_info
