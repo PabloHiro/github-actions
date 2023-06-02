@@ -31,6 +31,6 @@ runs:
         git config user.email "terraform@bot"
         git config user.name "Terraform Bot"
         git status
-        git commit -am "fix: auto linting"
+        git commit -am "fix: auto linting" --no-verify
         git push
       shell: bash
