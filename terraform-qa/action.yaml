@@ -28,3 +28,4 @@ runs:
         git status
         git commit -am "fix: terraform fmt"
         git push
+      shell: bash
