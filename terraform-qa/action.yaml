@@ -22,10 +22,11 @@ runs:
         pre-commit install
         pre-commit run --all-files
       shell: bash
-    - name: 'auto terraform fmt'
-      id: 'terraform-fmt'
+    - name: 'auto linting'
+      if: always()
+      id: 'auto linting'
       run: |
         git status
-        git commit -am "fix: terraform fmt"
+        git commit -am "fix: auto linting"
         git push
       shell: bash
