@@ -1,6 +1,8 @@
 ---
 name: Terraform Quality Assurance
 description: 'Pipeline that ensures the quality of Terraform code using pre-commit'
+permissions:
+  contents: write
 runs:
   using: "composite"
   steps:
@@ -26,6 +28,8 @@ runs:
       if: always()
       id: 'auto-linting'
       run: |
+        git config user.email "terraform@bot"
+        git config user.name "Terraform Bot"
         git status
         git commit -am "fix: auto linting"
         git push
