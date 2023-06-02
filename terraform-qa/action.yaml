@@ -22,9 +22,9 @@ runs:
         pre-commit install
         pre-commit run --all-files
       shell: bash
-    - name: 'auto linting'
+    - name: 'auto-linting'
       if: always()
-      id: 'auto linting'
+      id: 'auto-linting'
       run: |
         git status
         git commit -am "fix: auto linting"
