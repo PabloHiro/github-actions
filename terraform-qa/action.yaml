@@ -29,7 +29,6 @@ runs:
       uses: EndBug/add-and-commit@v9.1.3
       if: always()
       with:
-        add: ''
-        commit: -a
+        add: '-u'
         message: "fix: auto linting"
         default_author: user_info
