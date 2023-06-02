@@ -23,6 +23,7 @@ runs:
         detect-secrets scan > .secrets.baseline
         pre-commit install
         pre-commit run --all-files
+        git diff
       shell: bash
     - name: 'auto-linting'
       id: 'auto-linting'
