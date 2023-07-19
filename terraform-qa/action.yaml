@@ -14,10 +14,10 @@ runs:
         pip install detect-secrets
         curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
         curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
-        curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.16.0/terraform-docs-v0.16.0-$(uname)-amd64.tar.gz
-        tar -xzf terraform-docs.tar.gz
-        chmod +x terraform-docs
-        mv terraform-docs /usr/local/bin/terraform-docs
+        curl -sSLo /tmp/terraform-docs.tar.gz https://terraform-docs.io/dl/v0.16.0/terraform-docs-v0.16.0-$(uname)-amd64.tar.gz
+        tar -xzf /tmp/terraform-docs.tar.gz
+        chmod +x /tmp/terraform-docs
+        mv /tmp/terraform-docs /usr/local/bin/terraform-docs
       shell: bash
     - name: 'pre-commit'
       id: 'pre-commit'
