@@ -26,6 +26,9 @@ runs:
         cp ${GITHUB_ACTION_PATH}/pre-commit-terraform-qa.yaml .pre-commit-config.yaml
         # Copy the terraform-docs-terraform-qa.yml file in the repository where the action is defined to the repository where the action is executed
         cp ${GITHUB_ACTION_PATH}/terraform-docs-terraform-qa.yml .terraform-docs.yml
+        # Copy the tflint.hcl file in the repository where the action is defined to the repository where the action is executed
+        cp ${GITHUB_ACTION_PATH}/.tflint.hcl .tflint.hcl
+        tflint --init
         detect-secrets scan > .secrets.baseline
         ls -al
         pre-commit install

@@ -2,11 +2,12 @@ default_stages: [commit]
 exclude: '.github/.*|.gitignore'
 repos:
     - repo: https://github.com/antonbabenko/pre-commit-terraform
-      rev: v1.64.1
+      rev: v1.81.0
       hooks:
           - id: terraform_fmt
           - id: terraform_validate
           - id: terraform_tflint
+            exclude: 'examples/.*'
           - id: terraform_tfsec
           - id: terraform_docs
             args:
