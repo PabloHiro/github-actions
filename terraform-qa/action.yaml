@@ -36,14 +36,16 @@ runs:
       id: 'pre-commit-qa'
       shell: bash
       run: |
-        pre-commit install --config pre-commit-terraform-qa.yaml
+        cp pre-commit-terraform-qa.yaml .pre-commit-config.yaml
+        pre-commit install
         pre-commit run --all-files
     - name: 'pre-commit-lint'
       continue-on-error: true
       id: 'pre-commit-lint'
       shell: bash
       run: |
-        pre-commit install --config pre-commit-auto-linting.yaml
+        cp pre-commit-auto-linting.yaml .pre-commit-config.yaml
+        pre-commit install
         pre-commit run --all-files
     - name: 'auto-linting'
       id: 'auto-linting'
