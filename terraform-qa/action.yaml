@@ -6,8 +6,9 @@ permissions:
 runs:
   using: "composite"
   steps:
-    - name: 'install'
-      id: 'install'
+    - name: 'install-dependencies'
+      id: 'install-dependencies'
+      shell: bash
       run: |
         sudo apt install python3-pip
         pip install pre-commit
@@ -18,22 +19,32 @@ runs:
         tar -xzf /tmp/terraform-docs.tar.gz -C /tmp
         chmod +x /tmp/terraform-docs
         mv /tmp/terraform-docs /usr/local/bin/terraform-docs
+    - name: 'apply-configuration'
+      id: 'apply-configuration'
       shell: bash
-    - name: 'pre-commit'
-      id: 'pre-commit'
       run: |
-        # Copy the pre-commit-terraform-qa.yaml file in the repository where the action is defined to the repository where the action is executed
-        cp ${GITHUB_ACTION_PATH}/pre-commit-terraform-qa.yaml .pre-commit-config.yaml
+        # Copy the pre-commit configuration files in the repository where the action is defined to the repository where the action is executed
+        cp ${GITHUB_ACTION_PATH}/pre-commit-terraform-qa.yaml pre-commit-terraform-qa.yaml
+        cp ${GITHUB_ACTION_PATH}/pre-commit-auto-linting.yaml pre-commit-auto-linting.yaml
         # Copy the terraform-docs-terraform-qa.yml file in the repository where the action is defined to the repository where the action is executed
         cp ${GITHUB_ACTION_PATH}/terraform-docs-terraform-qa.yml .terraform-docs.yml
         # Copy the tflint.hcl file in the repository where the action is defined to the repository where the action is executed
         cp ${GITHUB_ACTION_PATH}/.tflint.hcl .tflint.hcl
         tflint --init
         detect-secrets scan > .secrets.baseline
-        ls -al
-        pre-commit install
-        pre-commit run --all-files
+    - name: 'pre-commit-qa'
+      id: 'pre-commit-qa'
       shell: bash
+      run: |
+        pre-commit install --config pre-commit-terraform-qa.yaml
+        pre-commit run --all-files
+    - name: 'pre-commit-lint'
+      continue-on-error: true
+      id: 'pre-commit-lint'
+      shell: bash
+      run: |
+        pre-commit install --config pre-commit-auto-linting.yaml
+        pre-commit run --all-files
     - name: 'auto-linting'
       id: 'auto-linting'
       uses: EndBug/add-and-commit@v9.1.3
